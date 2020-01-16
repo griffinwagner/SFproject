@@ -9,23 +9,23 @@
 import UIKit
 import MapKit
 
-class FPTableViewController: UITableViewController  {
+class JBTableViewController: UITableViewController  {
     
     var tableArray = [String] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    
+        
         mapView.mapType = MKMapType.satellite
-        let location = CLLocationCoordinate2D(latitude: 27.475569444444442,longitude: -80.3266)
+        let location = CLLocationCoordinate2D(latitude: 27.224413888888886,longitude: -80.20233888888889)
         let span = MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = "IRL-FP"
-        annotation.subtitle = "Fort Pierce"
+        annotation.title = "IRL-JB"
+        annotation.subtitle = "Jenson Beach"
         mapView.addAnnotation(annotation)
         
         
@@ -59,7 +59,7 @@ class FPTableViewController: UITableViewController  {
                 return
             }
             
-            if let array = json["FP"] as? [String] {
+            if let array = json["JB"] as? [String] {
                 self.tableArray = array
             }
             
@@ -84,7 +84,7 @@ class FPTableViewController: UITableViewController  {
     
 }
 
-extension FPTableViewController {
+extension JBTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell

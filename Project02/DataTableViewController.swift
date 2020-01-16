@@ -12,6 +12,8 @@ import MapKit
 
 class DataTableViewController: UITableViewController {
 
+    var tableArray = [String] ()
+
     @IBOutlet weak var SBMap: MKMapView!
     @IBOutlet weak var VBMap: MKMapView!
     @IBOutlet weak var LPMap: MKMapView!
@@ -22,8 +24,36 @@ class DataTableViewController: UITableViewController {
     @IBOutlet weak var MEMap: MKMapView!
     @IBOutlet weak var SFMap: MKMapView!
     @IBOutlet weak var SF2Map: MKMapView!
+    
+    @IBOutlet weak var loadingSBBloom: UILabel!
+    @IBOutlet weak var loadingVBBloom: UILabel!
+    @IBOutlet weak var loadingLPBloom: UILabel!
+    @IBOutlet weak var loadingFPBloom: UILabel!
+    @IBOutlet weak var loadingJBBloom: UILabel!
+    @IBOutlet weak var loadingSLEBloom: UILabel!
+    @IBOutlet weak var loadingNFBloom: UILabel!
+    @IBOutlet weak var loadingMEBloom: UILabel!
+    @IBOutlet weak var loadingSFBloom: UILabel!
+    @IBOutlet weak var loadingSF2Bloom: UILabel!
+    
+    @IBOutlet weak var loadingSBToxin: UILabel!
+    @IBOutlet weak var loadingVBToxin: UILabel!
+    @IBOutlet weak var loadingLPToxin: UILabel!
+    @IBOutlet weak var loadingFPToxin: UILabel!
+    @IBOutlet weak var loadingJBToxin: UILabel!
+    @IBOutlet weak var loadingSLEToxin: UILabel!
+    @IBOutlet weak var loadingNFToxin: UILabel!
+    @IBOutlet weak var loadingMEToxin: UILabel!
+    @IBOutlet weak var loadingSFToxin: UILabel!
+    @IBOutlet weak var loadingSF2Toxin: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        parseJSON()
+
+        
+        
         SBMap.layer.cornerRadius=15;
         VBMap.layer.cornerRadius=15;
         LPMap.layer.cornerRadius=15;
@@ -126,7 +156,7 @@ class DataTableViewController: UITableViewController {
         SF2annotation.coordinate = SF2location
         SF2Map.addAnnotation(SF2annotation)
 
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -134,71 +164,255 @@ class DataTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    // MARK: - Table view data source
+    func parseJSON() {
+        
+        let url = URL(string: "http://192.168.1.79:3000/downloadForiPhoneApp")
+        
+        print("hello")
+        
+        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+            
+            guard error == nil else {
+                return
+            }
+            
+            guard let content = data else {
+                return
+            }
+            
+            guard let json = (try? JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String: Any] else {
+                return
+            }
+            
+            if let array = json["SB"] as? [String] {
+                print("----")
+                self.loadingSBBloom.text = array[0]
+                self.loadingSBToxin.text = array[1]
+                
+                if (array[1] == "No Microcystin Detected"){
+                    self.loadingSBToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSBToxin.textColor = UIColor.red
+                }
+                
+                if (array[0] == "No Chance Of Bloom"){
+                    self.loadingSBBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSBBloom.textColor = UIColor.red
+                }
+                
+               
+                
+                self.tableArray = array
+            }
+            
+            if let VBarray = json["VB"] as? [String] {
+                print("----")
+                self.loadingVBBloom.text = VBarray[0]
+                self.loadingVBToxin.text = VBarray[1]
+                
+                if (VBarray[1] == "No Microcystin Detected"){
+                    self.loadingVBToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSBToxin.textColor = UIColor.red
+                }
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
+                if (VBarray[0] == "No Chance Of Bloom"){
+                    self.loadingVBBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingVBBloom.textColor = UIColor.red
+                }
+                
+                
+                self.tableArray = VBarray
+            }
+            
+            if let array = json["LP"] as? [String] {
+                print("----")
+                self.loadingLPBloom.text = array[0]
+                
+                if (array[0] == "No Chance Of Bloom"){
+                    self.loadingLPBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingLPBloom.textColor = UIColor.red
+                }
+                
+                self.loadingLPToxin.text = array[1]
+                
+                if (array[1] == "No Microcystin Detected"){
+                    self.loadingLPToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingLPToxin.textColor = UIColor.red
+                }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+                
+                self.tableArray = array
+            }
+            
+            if let FParray = json["FP"] as? [String] {
+                print("----")
+                self.loadingFPBloom.text = FParray[0]
+                
+                if (FParray[0] == "No Chance Of Bloom"){
+                    self.loadingFPBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingFPBloom.textColor = UIColor.red
+                }
+                
+                self.loadingFPToxin.text = FParray[1]
+                
+                if (FParray[1] == "No Microcystin Detected"){
+                    self.loadingFPToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingFPToxin.textColor = UIColor.red
+                }
 
-        // Configure the cell...
+                
+                self.tableArray = FParray
+            }
+            
+            if let JBarray = json["JB"] as? [String] {
+                print("----")
+                self.loadingJBBloom.text = JBarray[0]
+                
+                if (JBarray[0] == "No Chance Of Bloom"){
+                    self.loadingJBBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingJBBloom.textColor = UIColor.red
+                }
+                
+                self.loadingJBToxin.text = JBarray[1]
+                
+                if (JBarray[1] == "No Microcystin Detected"){
+                    self.loadingJBToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingJBToxin.textColor = UIColor.red
+                }
 
-        return cell
+                
+                
+                self.tableArray = JBarray
+            }
+            
+            if let SLEarray = json["SLE"] as? [String] {
+                print("----")
+                self.loadingSLEBloom.text = SLEarray[0]
+                
+                if (SLEarray[0] == "No Chance Of Bloom"){
+                    self.loadingSLEBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSLEBloom.textColor = UIColor.red
+                }
+                
+                self.loadingSLEToxin.text = SLEarray[1]
+                
+                if (SLEarray[1] == "No Microcystin Detected"){
+                    self.loadingSLEToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSLEToxin.textColor = UIColor.red
+                }
+
+                
+                self.tableArray = SLEarray
+            }
+            
+            if let NFarray = json["NF"] as? [String] {
+                print("----")
+                self.loadingNFBloom.text = NFarray[0]
+                
+                if (NFarray[0] == "No Chance Of Bloom"){
+                    self.loadingNFBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingNFBloom.textColor = UIColor.red
+                }
+                
+                self.loadingNFToxin.text = NFarray[1]
+                
+                if (NFarray[1] == "No Microcystin Detected"){
+                    self.loadingNFToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingNFToxin.textColor = UIColor.red
+                }
+
+                
+                self.tableArray = NFarray
+            }
+            
+            if let MEarray = json["ME"] as? [String] {
+                print("----")
+                self.loadingMEBloom.text = MEarray[0]
+                
+                if (MEarray[0] == "No Chance Of Bloom"){
+                    self.loadingMEBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingMEBloom.textColor = UIColor.red
+                }
+                
+                self.loadingMEToxin.text = MEarray[1]
+                
+                if (MEarray[1] == "No Microcystin Detected"){
+                    self.loadingMEToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingMEToxin.textColor = UIColor.red
+                }
+
+                
+                self.tableArray = MEarray
+            }
+            
+            if let SFarray = json["SF"] as? [String] {
+                print("----")
+                self.loadingSFBloom.text = SFarray[0]
+                
+                if (SFarray[0] == "No Chance Of Bloom"){
+                    self.loadingSFBloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSFBloom.textColor = UIColor.red
+                }
+                
+                self.loadingSFToxin.text = SFarray[1]
+                
+                if (SFarray[1] == "No Microcystin Detected"){
+                    self.loadingSFToxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSFToxin.textColor = UIColor.red
+                }
+
+                
+                self.tableArray = SFarray
+            }
+            
+            if let SF2array = json["SF2"] as? [String] {
+                print("----")
+                self.loadingSF2Bloom.text = SF2array[0]
+                
+                if (SF2array[0] == "No Chance Of Bloom"){
+                    self.loadingSF2Bloom.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSF2Bloom.textColor = UIColor.red
+                }
+                
+                self.loadingSF2Toxin.text = SF2array[1]
+                
+                if (SF2array[1] == "No Microcystin Detected"){
+                    self.loadingSF2Toxin.textColor = UIColor(red: 3/255, green: 161/255, blue: 0/255, alpha: 1)
+                } else {
+                    self.loadingSF2Toxin.textColor = UIColor.red
+                }
+
+                
+                self.tableArray = SF2array
+            }
+            
+            
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        }
+        
+        task.resume()
+        
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

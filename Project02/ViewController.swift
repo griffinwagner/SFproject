@@ -18,13 +18,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var ButtonLabel: UILabel!
     @IBOutlet weak var Button2: UIButton!
     @IBOutlet weak var ButtonLabel2: UILabel!
+    @IBOutlet weak var MLabel: UILabel!
+    @IBOutlet weak var BLabel: UILabel!
     
+    @IBOutlet weak var progress2: UIProgressView!
+    @IBOutlet weak var progress: UIProgressView!
     
     // keep this somewhere else so it would not die with this View Controller
     // as it would lost its function
     private let imageCache = NSCache<NSString, UIImage>()
     private static let imageCacheKey: NSString = "CachedMapSnapshot" // this should be object specific name
+    let buttonX = 20
+    let buttonY = 160
+    let buttonWidth = 374 //374
+    let buttonHeight = 640
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadMapPreview()
@@ -39,8 +48,8 @@ class ViewController: UIViewController {
         Button2.layer.cornerRadius=30;
         Button2.layer.borderWidth=0.0;
         Button2.layer.masksToBounds = true;
-        var sitesMicrocystin = ["FP", "JB", "ME", "SF"]
-        var sitesBlooms = [String]()
+        var sitesMicrocystin = ["FP", "JB", "SF"]
+        var sitesBlooms = ["SF2"]
         
 
     
@@ -69,7 +78,7 @@ class ViewController: UIViewController {
             Button.backgroundColor = UIColor(red: 102/255, green: 250/255, blue: 51/255, alpha: 0.5)
         }
         
-        if false {
+        if true {
             Button2.backgroundColor = UIColor(red: 230/255, green: 0/255, blue: 0/255, alpha: 0.5)
             ButtonLabel2.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
             

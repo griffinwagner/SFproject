@@ -41,7 +41,7 @@ class VBTableViewController: UITableViewController  {
     @IBOutlet weak var mapView: MKMapView!
     func parseJSON() {
         
-        let url = URL(string: "http://192.168.1.66:3000/downloadForiPhoneApp")
+        let url = URL(string: "http://192.168.1.79:3000/downloadForiPhoneApp")
         
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             

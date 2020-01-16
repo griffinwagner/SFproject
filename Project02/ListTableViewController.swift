@@ -62,8 +62,9 @@ class ListTableViewController: UITableViewController {
         FPToxin.image = UIImage(named: "warn")
 
         JBToxin.image = UIImage(named: "warn")
-        METoxin.image = UIImage(named: "warn")
         SFToxin.image = UIImage(named: "warn")
+        SF2Bloom.image = UIImage(named: "warn")
+
 
      //   cell1?.backgroundColor = swiftColor
         // Uncomment the following line to preserve selection between presentations
