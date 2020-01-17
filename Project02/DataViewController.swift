@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import WebKit
 
-class DataViewController: UIViewController {
+class DataViewController: UIViewController, WKNavigationDelegate {
     
 
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
     }
+    
+
     
     
     

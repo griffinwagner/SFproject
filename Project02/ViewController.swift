@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var progress2: UIProgressView!
     @IBOutlet weak var progress: UIProgressView!
+    @IBOutlet weak var submit: UIButton!
     
     // keep this somewhere else so it would not die with this View Controller
     // as it would lost its function
@@ -45,13 +46,17 @@ class ViewController: UIViewController {
         Button.layer.borderWidth=0.0;
         Button.layer.masksToBounds = true;
         
+        
+        
         Button2.layer.cornerRadius=30;
         Button2.layer.borderWidth=0.0;
         Button2.layer.masksToBounds = true;
         var sitesMicrocystin = ["FP", "JB", "SF"]
         var sitesBlooms = ["SF2"]
         
-
+        submit.layer.cornerRadius = 30;
+        submit.layer.borderWidth = 2.0;
+        submit.layer.masksToBounds = true
     
         if true {
             Button.backgroundColor = UIColor(red: 230/255, green: 0/255, blue: 0/255, alpha: 0.5)

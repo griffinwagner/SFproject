@@ -25,24 +25,31 @@ class ListTableViewController: UITableViewController {
     
     @IBOutlet weak var SBToxin: UIImageView!
     @IBOutlet weak var SBBloom: UIImageView!
+    
     @IBOutlet weak var VBToxin: UIImageView!
     @IBOutlet weak var VBBloom: UIImageView!
+    
     @IBOutlet weak var LPToxin: UIImageView!
     @IBOutlet weak var LPBloom: UIImageView!
     @IBOutlet weak var FPToxin: UIImageView!
     @IBOutlet weak var FPBloom: UIImageView!
+    
     @IBOutlet weak var JBToxin: UIImageView!
     @IBOutlet weak var JBBloom: UIImageView!
+    
+
     @IBOutlet weak var SLEToxin: UIImageView!
     @IBOutlet weak var SLEBloom: UIImageView!
+    
     @IBOutlet weak var NFToxin: UIImageView!
     @IBOutlet weak var NFBloom: UIImageView!
-    @IBOutlet weak var METoxin: UIImageView!
     @IBOutlet weak var MEBloom: UIImageView!
+    @IBOutlet weak var METoxin: UIImageView!
     @IBOutlet weak var SFToxin: UIImageView!
     @IBOutlet weak var SFBloom: UIImageView!
     @IBOutlet weak var SF2Toxin: UIImageView!
     @IBOutlet weak var SF2Bloom: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let swiftColor = UIColor(red: 120/255, green: 120/255, blue: 120/255, alpha: 0.85);
@@ -60,8 +67,9 @@ class ListTableViewController: UITableViewController {
         
 //
         FPToxin.image = UIImage(named: "warn")
-
         JBToxin.image = UIImage(named: "warn")
+
+        
         SFToxin.image = UIImage(named: "warn")
         SF2Bloom.image = UIImage(named: "warn")
 
