@@ -37,7 +37,7 @@ class MapUIViewController: UIViewController {
         mapView.mapType = MKMapType.satellite
         let LPlocation = CLLocationCoordinate2D(latitude: 27.53500000,longitude: -80.34217888888889)
         let FPlocation = CLLocationCoordinate2D(latitude: 27.475569444444442,longitude: -80.3266)
-        let center = CLLocationCoordinate2D(latitude: 27.475569444444442, longitude: -80.3)
+        let center = CLLocationCoordinate2D(latitude: 27.475569444444442, longitude: -80)
         let span = MKCoordinateSpan(latitudeDelta: 0.9, longitudeDelta: 0.25)
         let region = MKCoordinateRegion(center: center, span: span)
         let SFlocation = CLLocationCoordinate2D(latitude: 27.18815,longitude: -80.261425)
